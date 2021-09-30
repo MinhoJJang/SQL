@@ -1,3 +1,3 @@
 # SQL
 
-Upload SQL 
+Update what I learned... 
