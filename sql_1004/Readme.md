@@ -22,9 +22,9 @@ AND B.location_id = C.location_id;
 ```
 
 
-// 아직 이해안간부분...
-# Self Join
 
+# Self Join
+// 아직 이해안간부분임..
 ```sql
 SELECT A.employee_id, A.first_name, A.last_name, A.manager_id,
         B.first_name || ' ' || B.last_name manager_name
