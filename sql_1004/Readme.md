@@ -31,7 +31,7 @@ SELECT A.employee_id, A.first_name, A.last_name, A.manager_id,
 FROM employees A, employees B
 WHERE A.manager_id = B.manager_id;
 ```
-**동일한 employees 테이블을 사용하여 A 테이블은 manager_id, B테이블은 employee_id 로 조인하여 매니저가 누구인지 이름을 출력한다. 같은 테이블을 사용하지만, 각기 다른 별명을 사용하기 때문에 마치 다른 두개의 테이블을 조인하는 것처럼 보인다. self Join을 할 는 반드시 '별명.열이름' 형태로 명확하게 조인한다.**
+**동일한 employees 테이블을 사용하여 A 테이블은 manager_id, B테이블은 employee_id 로 조인하여 매니저가 누구인지 이름을 출력한다. 같은 테이블을 사용하지만, 각기 다른 별명을 사용하기 때문에 마치 다른 두개의 테이블을 조인하는 것처럼 보인다. self Join을 할 때는 반드시 '별명.열이름' 형태로 명확하게 조인한다.**
 
 # COUNT
 연결한 테이블의 데이터 개수를 가져오는 키워드
