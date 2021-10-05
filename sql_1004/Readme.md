@@ -21,8 +21,6 @@ WHERE A.department_id = B.department_id
 AND B.location_id = C.location_id;
 ```
 
-
-
 # Self Join
 // 아직 이해안간부분임..
 ```sql
