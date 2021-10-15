@@ -1,3 +1,5 @@
 # SQL
 
-sql 21.09.24~
+Update SQL class.
+
+***1013 New T.***
