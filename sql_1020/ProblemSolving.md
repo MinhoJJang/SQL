@@ -1,0 +1,65 @@
+# Problem Solving
+
+Using Sub-Query
+
+## 문제 1. employees 테이블에서 급여의 평균보다 작은 사원의 사원번호, 이름, 담당업무, 급여, 부서번호 출력
+```sql
+SELECT EMPLOYEE_ID , 
+	   FIRST_NAME || ' ' || LAST_NAME AS NAME , 
+	   JOB_ID ,
+	   SALARY ,
+	   DEPARTMENT_ID 
+FROM EMPLOYEES e 
+WHERE SALARY < (SELECT AVG(SALARY)
+				FROM EMPLOYEES e2)
+ORDER BY SALARY DESC
+;
+```
+## 문2. EMPLOYEES 테이블에서 100번 부서의 최소 급여보다 최소 급여가 많은 다른 모든 부서를 출력하라
+```sql
+SELECT DEPARTMENT_ID 
+FROM EMPLOYEES e 
+WHERE DEPARTMENT_ID IS NOT NULL
+GROUP BY DEPARTMENT_ID 
+HAVING MIN(SALARY) > (SELECT MIN(SALARY)
+					 FROM EMPLOYEES e2 
+					 WHERE DEPARTMENT_ID = 100)
+;
+```
+## 문3. EMPLOYEES 테이블에서 가장 많은 사원을 갖는 Manager의 사원번호를 출력하라.
+```sql
+SELECT e.EMPLOYEE_ID 
+FROM EMPLOYEES e 
+WHERE MANAGER_ID = (SELECT MANAGER_ID
+					FROM EMPLOYEES e 		
+					GROUP BY MANAGER_ID 
+					HAVING COUNT(MANAGER_ID) = (SELECT MAX(COUNT(MANAGER_ID))
+												FROM EMPLOYEES e 
+												GROUP BY MANAGER_ID));
+```
+## 문4. EMPLOYEES 테이블에서 가장 많은 사원이 속해있는 부서 번호와 사원수를 출력하라
+```sql
+SELECT e.DEPARTMENT_ID , COUNT(e.DEPARTMENT_ID)
+FROM EMPLOYEES e
+WHERE DEPARTMENT_ID IS NOT NULL
+GROUP BY DEPARTMENT_ID 
+HAVING COUNT(DEPARTMENT_ID) = (SELECT MAX(COUNT(DEPARTMENT_ID))
+							   FROM EMPLOYEES e2	
+							   GROUP BY DEPARTMENT_ID)
+;
+```
+## 문5. EMPLOYEES 테이블에서 사원번호가 123인 사원의 직업과 같고, 사원번호가 192인 사원의 급여(sal)보다 많은 사원의 사원번호, 이름, 직업, 급여를 출력하라
+```sql
+SELECT e.EMPLOYEE_ID ,
+	   e.FIRST_NAME || ' ' || e.LAST_NAME ,
+	   e.JOB_ID ,
+	   e.SALARY 
+FROM EMPLOYEES e 
+WHERE e.JOB_ID = (SELECT JOB_ID 
+				  FROM EMPLOYEES e2
+				  WHERE e2.EMPLOYEE_ID = 123)
+AND e.SALARY > (SELECT SALARY 
+				FROM EMPLOYEES e3
+				WHERE e3.EMPLOYEE_ID = 192)
+;
+```
